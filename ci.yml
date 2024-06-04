@@ -1,0 +1,26 @@
+name: Uruchamianie testów jednostkowych
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  testy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wyrejestruj się i zaktualizuj
+        uses: actions/checkout@v3
+
+      - name: Zainstaluj Pythona
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.x
+
+      - name: Zainstaluj zależności
+        run: pip install -r requirements.txt
+
+      - name: Uruchom testy jednostkowe
+        run: pytest
